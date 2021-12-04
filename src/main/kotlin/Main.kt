@@ -3,8 +3,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Button
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -101,6 +105,7 @@ fun main() {
                             fetchQuote()
                             println("done")
                         }) {
+                        Icon(Icons.Filled.Refresh, contentDescription = "Refresh Stock Quotes")
                         Text("Refresh")
                     }
                     Text(quote.globalQuote.toString())

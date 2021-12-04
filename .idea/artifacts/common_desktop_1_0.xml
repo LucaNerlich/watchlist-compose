@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="common-desktop-1.0">
-    <output-path>C:\Users\Luca\IdeaProjects\watchlist-compose\common\build\libs</output-path>
-    <root id="archive" name="common-desktop-1.0.jar">
-      <element id="module-output" name="watchlist-compose.common.desktopMain" />
-    </root>
-  </artifact>
-</component>

@@ -1,4 +1,4 @@
-package de.pnn-it.common
+package de.pnn.common
 
 import androidx.compose.material.Text
 import androidx.compose.material.Button
@@ -7,6 +7,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import de.pnnit.common.getPlatformName
 
 @Composable
 fun App() {

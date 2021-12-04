@@ -4,7 +4,7 @@ plugins {
     kotlin("android")
 }
 
-group = "de.pnn-it"
+group = "de.pnn"
 version = "1.0"
 
 repositories {
@@ -19,7 +19,7 @@ dependencies {
 android {
     compileSdkVersion(30)
     defaultConfig {
-        applicationId = "de.pnn-it.android"
+        applicationId = "de.pnn.android"
         minSdkVersion(24)
         targetSdkVersion(30)
         versionCode = 1

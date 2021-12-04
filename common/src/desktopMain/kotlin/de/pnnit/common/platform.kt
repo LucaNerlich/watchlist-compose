@@ -1,6 +1,4 @@
-package de.pnn
-
--it.common
+package de.pnnit.common
 
 actual fun getPlatformName(): String {
     return "Desktop"

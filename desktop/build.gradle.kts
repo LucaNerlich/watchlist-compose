@@ -6,7 +6,7 @@ plugins {
     id("org.jetbrains.compose") version "1.0.0-alpha3"
 }
 
-group = "de.pnn-it"
+group = "de.pnn"
 version = "1.0"
 
 kotlin {

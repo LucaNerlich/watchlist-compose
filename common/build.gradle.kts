@@ -6,7 +6,7 @@ plugins {
     id("com.android.library")
 }
 
-group = "de.pnn-it"
+group = "de.pnn"
 version = "1.0"
 
 kotlin {

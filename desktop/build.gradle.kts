@@ -4,7 +4,6 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 plugins {
     kotlin("multiplatform")
     id("org.jetbrains.compose") version "1.0.0-alpha3"
-    id("org.jetbrains.compose") version "1.0.0-alpha3"
 }
 
 group = "de.pnn-it"

@@ -2,7 +2,17 @@
 <module type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
-    <content url="file://$MODULE_DIR$" />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/.gradle/6.9/executionHistory" />
+      <excludeFolder url="file://$MODULE_DIR$/.gradle/6.9/fileChanges" />
+      <excludeFolder url="file://$MODULE_DIR$/.gradle/6.9/fileHashes" />
+      <excludeFolder url="file://$MODULE_DIR$/.gradle/6.9/vcsMetadata-1" />
+      <excludeFolder url="file://$MODULE_DIR$/.gradle/buildOutputCleanup" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/sonarlint" />
+      <excludeFolder url="file://$MODULE_DIR$/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/gradle" />
+    </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>

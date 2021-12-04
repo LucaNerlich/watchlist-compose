@@ -58,43 +58,53 @@ data class Quote(
     val globalQuote: GlobalQuote
 )
 
-val quote = runBlocking {
-    val httpResponse: HttpResponse =
-        client.get("https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=IBM&apikey=demo")
-    httpResponse.receive<Quote>()
+lateinit var quote: Quote
+
+private fun fetchQuote() {
+    quote = runBlocking {
+        val httpResponse: HttpResponse =
+            client.get("https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=IBM&apikey=demo")
+        httpResponse.receive<Quote>()
+    }
 }
 
 // https://ktor.io/docs/json.html#gson
 // https://ktor.io/docs/response.html
 
-fun main() = application {
-    Window(
-        onCloseRequest = ::exitApplication,
-        title = "Watchlist - Compose",
-        state = rememberWindowState(width = 1024.dp, height = 800.dp)
-    ) {
-        val count = remember { mutableStateOf(0) }
-        MaterialTheme {
-            Column(Modifier.fillMaxSize(), Arrangement.spacedBy(5.dp)) {
-                Button(modifier = Modifier.align(Alignment.CenterHorizontally),
-                    onClick = {
-                        count.value++
-                    }) {
-                    Text(if (count.value == 0) "Hello World" else "Clicked ${count.value}!")
+fun main() {
+    fetchQuote()
+
+    application {
+        Window(
+            onCloseRequest = ::exitApplication,
+            title = "Watchlist - Compose",
+            state = rememberWindowState(width = 1024.dp, height = 800.dp)
+        ) {
+            val count = remember { mutableStateOf(0) }
+            MaterialTheme {
+                Column(Modifier.fillMaxSize(), Arrangement.spacedBy(5.dp)) {
+                    Button(modifier = Modifier.align(Alignment.CenterHorizontally),
+                        onClick = {
+                            count.value++
+                        }) {
+                        Text(if (count.value == 0) "Hello World" else "Clicked ${count.value}!")
+                    }
+                    Button(modifier = Modifier.align(Alignment.CenterHorizontally),
+                        onClick = {
+                            count.value = 0
+                        }) {
+                        Text("Reset")
+                    }
+                    Button(modifier = Modifier.align(Alignment.CenterHorizontally),
+                        onClick = {
+                            print("Running fetch ... ")
+                            fetchQuote()
+                            println("done")
+                        }) {
+                        Text("Refresh")
+                    }
+                    Text(quote.globalQuote.toString())
                 }
-                Button(modifier = Modifier.align(Alignment.CenterHorizontally),
-                    onClick = {
-                        count.value = 0
-                    }) {
-                    Text("Reset")
-                }
-                Button(modifier = Modifier.align(Alignment.CenterHorizontally),
-                    onClick = {
-                        quote
-                    }) {
-                    Text("Refresh")
-                }
-                Text(quote.globalQuote.toString())
             }
         }
     }

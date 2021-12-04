@@ -13,20 +13,58 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
+import com.google.gson.annotations.SerializedName
 import io.ktor.client.*
 import io.ktor.client.call.*
+import io.ktor.client.features.json.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import kotlinx.coroutines.runBlocking
 
-val client = HttpClient()
-
-val stockValue = runBlocking {
-    val httpResponse: HttpResponse =
-        client.get<HttpResponse>("https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=IBM&apikey=demo")
-    httpResponse.receive<String>()
+val client = HttpClient() {
+    install(JsonFeature) {
+        serializer = GsonSerializer() {
+            setPrettyPrinting()
+            disableHtmlEscaping()
+        }
+    }
 }
 
+data class GlobalQuote(
+    @SerializedName("01. symbol")
+    val symbol: String,
+    @SerializedName("02. open")
+    val open: Float,
+    @SerializedName("03. high")
+    val high: Float,
+    @SerializedName("04. low")
+    val low: Float,
+    @SerializedName("05. price")
+    val price: Float,
+    @SerializedName("06. volume")
+    val volume: Float,
+    @SerializedName("07. latest trading day")
+    val latestTradingDay: String,
+    @SerializedName("08. previous close")
+    val previousClose: Float,
+    @SerializedName("09. change")
+    val change: Float,
+    @SerializedName("10. change percent")
+    val changePercent: String,
+)
+
+data class Quote(
+    @SerializedName("Global Quote")
+    val globalQuote: GlobalQuote
+)
+
+val quote = runBlocking {
+    val httpResponse: HttpResponse =
+        client.get("https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=IBM&apikey=demo")
+    httpResponse.receive<Quote>()
+}
+
+// https://ktor.io/docs/json.html#gson
 // https://ktor.io/docs/response.html
 
 fun main() = application {
@@ -50,7 +88,13 @@ fun main() = application {
                     }) {
                     Text("Reset")
                 }
-                Text(stockValue)
+                Button(modifier = Modifier.align(Alignment.CenterHorizontally),
+                    onClick = {
+                        quote
+                    }) {
+                    Text("Refresh")
+                }
+                Text(quote.globalQuote.toString())
             }
         }
     }

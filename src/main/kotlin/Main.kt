@@ -13,12 +13,27 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
+import io.ktor.client.*
+import io.ktor.client.call.*
+import io.ktor.client.request.*
+import io.ktor.client.statement.*
+import kotlinx.coroutines.runBlocking
+
+val client = HttpClient()
+
+val stockValue = runBlocking {
+    val httpResponse: HttpResponse =
+        client.get<HttpResponse>("https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=IBM&apikey=demo")
+    httpResponse.receive<String>()
+}
+
+// https://ktor.io/docs/response.html
 
 fun main() = application {
     Window(
         onCloseRequest = ::exitApplication,
-        title = "Compose for Desktop",
-        state = rememberWindowState(width = 300.dp, height = 300.dp)
+        title = "Watchlist - Compose",
+        state = rememberWindowState(width = 1024.dp, height = 800.dp)
     ) {
         val count = remember { mutableStateOf(0) }
         MaterialTheme {
@@ -35,7 +50,11 @@ fun main() = application {
                     }) {
                     Text("Reset")
                 }
+                Text(stockValue)
             }
         }
     }
 }
+
+// https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=IBM&apikey=demo
+// https://stackoverflow.com/questions/58379740/data-fetching-from-an-api-in-android

@@ -33,11 +33,11 @@ val client = HttpClient() {
 
 lateinit var quote: Quote
 
-private fun fetchQuote() {
+private fun fetchQuote(symbol: String = "IBM", apiKey: String = "demo") {
     quote = runBlocking {
         val httpResponse: HttpResponse =
-            client.get("https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=IBM&apikey=demo")
-        httpResponse.receive<Quote>()
+            client.get("https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=$symbol&apikey=$apiKey")
+        httpResponse.receive()
     }
 }
 

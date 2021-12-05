@@ -21,6 +21,9 @@ import io.ktor.client.features.json.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import kotlinx.coroutines.runBlocking
+import kotlin.system.exitProcess
+
+const val APIKEY_ENVVAR_KEY = "APIKEY"
 
 val client = HttpClient() {
     install(JsonFeature) {
@@ -53,6 +56,13 @@ fun main() {
      */
 
     // init
+    @Suppress("UNUSED_VARIABLE")
+    val apikey = System.getenv(APIKEY_ENVVAR_KEY)?.let {
+        println("Using api key: $it")
+    } ?: run {
+        println("You have to provide an api key via the env var $APIKEY_ENVVAR_KEY")
+        exitProcess(1)
+    }
     fetchQuote()
 
     // run app

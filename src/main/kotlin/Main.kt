@@ -58,6 +58,7 @@ fun main() {
     @Suppress("UNUSED_VARIABLE")
     val apikey = System.getenv(APIKEY_ENVVAR_KEY)?.let {
         println("Using api key: $it")
+        it
     } ?: run {
         println("You have to provide an api key via the env var $APIKEY_ENVVAR_KEY")
         exitProcess(1)

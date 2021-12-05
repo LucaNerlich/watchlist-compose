@@ -31,6 +31,8 @@ val client = HttpClient() {
     }
 }
 
+val symbols: Array<String> = arrayOf("IBM", "ADBE")
+
 lateinit var quote: Quote
 
 private fun fetchQuote(symbol: String = "IBM", apiKey: String = "demo") {
@@ -49,7 +51,6 @@ fun main() {
     todos:
     make fetchQuote asyn
      */
-
 
     // init
     fetchQuote()
@@ -74,6 +75,15 @@ fun main() {
                                     Button(onClick = { }) {
                                         Icon(Icons.Filled.Home, contentDescription = "Home")
                                     }
+                                },
+                                actions = {
+                                    IconButton(onClick = {
+                                        print("Running fetch ... ")
+                                        fetchQuote()
+                                        println("done")
+                                    }) {
+                                        Icon(Icons.Filled.Refresh, contentDescription = "Refresh Stock Quotes")
+                                    }
                                 }
                             )
                         },
@@ -90,15 +100,6 @@ fun main() {
                                         count.value = 0
                                     }) {
                                     Text("Reset")
-                                }
-                                Button(modifier = Modifier.align(Alignment.CenterHorizontally),
-                                    onClick = {
-                                        print("Running fetch ... ")
-                                        fetchQuote()
-                                        println("done")
-                                    }) {
-                                    Icon(Icons.Filled.Refresh, contentDescription = "Refresh Stock Quotes")
-                                    Text("Refresh")
                                 }
                                 ListEntry(quote)
                                 Text(quote.globalQuote.toString())

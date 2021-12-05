@@ -1,4 +1,3 @@
-// Copyright 2000-2021 JetBrains s.r.o. and contributors. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -7,7 +6,6 @@ import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -17,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
-import com.google.gson.annotations.SerializedName
+import entities.Quote
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.features.json.*
@@ -34,34 +32,6 @@ val client = HttpClient() {
     }
 }
 
-data class GlobalQuote(
-    @SerializedName("01. symbol")
-    val symbol: String,
-    @SerializedName("02. open")
-    val open: Float,
-    @SerializedName("03. high")
-    val high: Float,
-    @SerializedName("04. low")
-    val low: Float,
-    @SerializedName("05. price")
-    val price: Float,
-    @SerializedName("06. volume")
-    val volume: Float,
-    @SerializedName("07. latest trading day")
-    val latestTradingDay: String,
-    @SerializedName("08. previous close")
-    val previousClose: Float,
-    @SerializedName("09. change")
-    val change: Float,
-    @SerializedName("10. change percent")
-    val changePercent: String,
-)
-
-data class Quote(
-    @SerializedName("Global Quote")
-    val globalQuote: GlobalQuote
-)
-
 lateinit var quote: Quote
 
 private fun fetchQuote() {
@@ -76,8 +46,16 @@ private fun fetchQuote() {
 // https://ktor.io/docs/response.html
 
 fun main() {
+    /*
+    todos:
+    make fetchQuote asyn
+     */
+
+
+    // init
     fetchQuote()
 
+    // run app
     application {
         Window(
             onCloseRequest = ::exitApplication,

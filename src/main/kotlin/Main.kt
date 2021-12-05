@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
+import composables.ListEntry
 import entities.Quote
 import io.ktor.client.*
 import io.ktor.client.call.*
@@ -99,6 +100,7 @@ fun main() {
                                     Icon(Icons.Filled.Refresh, contentDescription = "Refresh Stock Quotes")
                                     Text("Refresh")
                                 }
+                                ListEntry(quote)
                                 Text(quote.globalQuote.toString())
                             }
                         }

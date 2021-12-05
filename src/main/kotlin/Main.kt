@@ -1,11 +1,9 @@
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.Button
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -64,29 +62,47 @@ fun main() {
         ) {
             val count = remember { mutableStateOf(0) }
             MaterialTheme {
-                Column(Modifier.fillMaxSize(), Arrangement.spacedBy(5.dp)) {
-                    Button(modifier = Modifier.align(Alignment.CenterHorizontally),
-                        onClick = {
-                            count.value++
-                        }) {
-                        Text(if (count.value == 0) "Hello World" else "Clicked ${count.value}!")
-                    }
-                    Button(modifier = Modifier.align(Alignment.CenterHorizontally),
-                        onClick = {
-                            count.value = 0
-                        }) {
-                        Text("Reset")
-                    }
-                    Button(modifier = Modifier.align(Alignment.CenterHorizontally),
-                        onClick = {
-                            print("Running fetch ... ")
-                            fetchQuote()
-                            println("done")
-                        }) {
-                        Icon(Icons.Filled.Refresh, contentDescription = "Refresh Stock Quotes")
-                        Text("Refresh")
-                    }
-                    Text(quote.globalQuote.toString())
+                Column {
+                    Scaffold(
+                        topBar = {
+                            TopAppBar(
+                                title = {
+                                    Text(text = "Watchlist")
+                                },
+                                navigationIcon = {
+                                    Button(onClick = { }) {
+                                        Icon(Icons.Filled.Home, contentDescription = "Home")
+                                    }
+                                }
+                            )
+                        },
+                        content = {
+                            Column(Modifier.fillMaxSize(), Arrangement.spacedBy(5.dp)) {
+                                Button(modifier = Modifier.align(Alignment.CenterHorizontally),
+                                    onClick = {
+                                        count.value++
+                                    }) {
+                                    Text(if (count.value == 0) "Hello World" else "Clicked ${count.value}!")
+                                }
+                                Button(modifier = Modifier.align(Alignment.CenterHorizontally),
+                                    onClick = {
+                                        count.value = 0
+                                    }) {
+                                    Text("Reset")
+                                }
+                                Button(modifier = Modifier.align(Alignment.CenterHorizontally),
+                                    onClick = {
+                                        print("Running fetch ... ")
+                                        fetchQuote()
+                                        println("done")
+                                    }) {
+                                    Icon(Icons.Filled.Refresh, contentDescription = "Refresh Stock Quotes")
+                                    Text("Refresh")
+                                }
+                                Text(quote.globalQuote.toString())
+                            }
+                        }
+                    )
                 }
             }
         }

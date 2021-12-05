@@ -23,7 +23,7 @@ import io.ktor.client.statement.*
 import kotlinx.coroutines.runBlocking
 import kotlin.system.exitProcess
 
-const val APIKEY_ENVVAR_KEY = "APIKEY"
+const val APIKEY_ENVVAR_KEY = "ALPHAVANTAGE_APIKEY"
 
 val client = HttpClient() {
     install(JsonFeature) {
@@ -54,7 +54,6 @@ fun main() {
     todos:
     make fetchQuote asyn
      */
-
     // init
     @Suppress("UNUSED_VARIABLE")
     val apikey = System.getenv(APIKEY_ENVVAR_KEY)?.let {

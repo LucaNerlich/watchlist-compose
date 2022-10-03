@@ -19,7 +19,7 @@ repositories {
 }
 
 dependencies {
-    val ktorVersion = "2.1.1"
+    val ktorVersion = "2.1.2"
     testImplementation(kotlin("test"))
     implementation(compose.desktop.currentOs)
     implementation("io.ktor:ktor-client-core:$ktorVersion")

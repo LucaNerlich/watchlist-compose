@@ -4,7 +4,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     val kotlinVersion = "1.5.31"
-    val composeVersion = "1.0.0"
+    val composeVersion = "1.2.1"
     kotlin("jvm") version kotlinVersion
     id("org.jetbrains.compose") version composeVersion
 }
